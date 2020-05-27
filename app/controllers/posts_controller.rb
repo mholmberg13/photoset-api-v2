@@ -18,7 +18,7 @@ class PostsController < ApplicationController
   # POST /posts
   def create
     image = Cloudinary::Uploader.upload(params[:image])
-    @post = Post.new(title: "New Post", image: image["url"], photographer: "Matt Holmberg", shutter: "125", iso: "400", aperture: "9")
+    @post = Post.new(title: params[:title], image: image["url"], photographer: params[:photographer], shutter: params[:shutter], iso: params[:iso], aperture: params[:aperture])
     
     if @post.save
       render json: @post, status: :created, location: @post
